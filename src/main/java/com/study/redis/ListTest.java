@@ -81,12 +81,25 @@ public class ListTest {
         count<0：删除等于从尾到头移动的值的元素 (删除个数为count的绝对值)
         */
         redisTemplate.delete("user");
-        String[] user = new String[]{"1", "pan_junbiao的博客", "您好，欢迎访问 pan_junbiao的博客","pan_junbiao的博客","pan_junbiao的博客"};
+        String[] user = new String[]{"1", "pan_junbiao的博客", "您好，欢迎访问 pan_junbiao的博客", "pan_junbiao的博客", "pan_junbiao的博客"};
         redisTemplate.opsForList().rightPushAll("user", user);
         System.out.println(redisTemplate.opsForList().range("user", 0, -1));
 
         //将删除列表中第一次出现的pan_junbiao的博客
         redisTemplate.opsForList().remove("user", 0, "pan_junbiao的博客");
+        System.out.println(redisTemplate.opsForList().range("user", 0, -1));
+    }
+
+    @Test
+    public void list6() {
+        redisTemplate.delete("user");
+        //leftPop方法：弹出最左边的元素，弹出之后该值在列表中将不复存在。
+        //rightPop方法：弹出最右边的元素，弹出之后该值在列表中将不复存在。
+        String[] user = new String[]{"1", "pan_junbiao的博客", "您好，欢迎访问 pan_junbiao的博客"};
+        redisTemplate.opsForList().rightPushAll("user", user);
+        System.out.println(redisTemplate.opsForList().range("user", 0, -1));
+        //弹出最右边的元素，弹出之后该值在列表中将不复存在
+        System.out.println(redisTemplate.opsForList().rightPop("user"));
         System.out.println(redisTemplate.opsForList().range("user", 0, -1));
     }
 
