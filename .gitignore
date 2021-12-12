@@ -1,0 +1,9 @@
+.idea
+target
+.project
+*.iml
+*.mvn
+*mvnw
+.classpath
+.settings
+src/main/resources/generator/generatorConfig\.xml
